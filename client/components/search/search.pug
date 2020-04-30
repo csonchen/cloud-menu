@@ -1,0 +1,42 @@
+//-
+  参数说明:
+  参数                       参数说明                 参数类型
+  placeholder                缺省文本                 String
+  isOval                     圆角输入框               Boolean 
+  focus                      自动聚焦，拉起输入框     Boolean
+  maxlength                  最大输入长度             Number
+  value                      默认输入值               String
+  showClear                  显示"x"icon              Boolean
+  showSearchText             显示“取消”文本           Boolean
+  disabled                   禁用输入框               Boolean
+
+  例子：
+  <search placeholder="test" />
+
+view.search
+  view(class="bg {{ isOval ? 'bg-oval' : '' }}")
+    image.icon-search(src="/images/icon_search_dark.png")
+    input.input(
+      disabled="{{ disabled }}"
+      type="text"
+      value="{{ value }}"
+      placeholder="{{ placeholder }}"
+      placeholder-style="color: #cccccc"
+      maxlength="{{ maxlength }}"
+      focus="{{ focus }}"
+      confirm-type="search"
+      bindinput="handleInput"
+      bindconfirm="handleSearch"
+      bindfocus="handleFocus" 
+      bindblur="handleBlur"
+    )
+    icon.icon-clear(
+      type="clear"
+      size="14"
+      bind:tap="handleClear"
+      hidden="{{!showClear || !clearIconVisible}}"
+    )
+  text.btn-cancel(
+    bind:tap="handleCancel"
+    wx:if="{{!!value ? showSearchText : ''}}"
+  ) 取消

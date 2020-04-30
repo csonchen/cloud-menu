@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "search": "/components/search/search",
+    "weekBestCard": "/components/weekBestCard/weekBestCard",
+    "popularCard": "/components/popularCard/popularCard",
+    "menuCard": "/components/menuCard/menuCard",
+    "newPicCard": "/components/newPicCard/newPicCard"
+  }
+}
