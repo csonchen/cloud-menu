@@ -1,3 +1,9 @@
 view.page-wrapper
-  each val in [1, 2, 3]
-    menuCard
+
+  view.menu-list
+    menuCard(
+      wx:for="{{menuList}}"
+      wx:key="_id",
+      wx:for-item="menu"
+      menu="{{menu}}"
+    )
