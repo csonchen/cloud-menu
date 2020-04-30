@@ -4,19 +4,22 @@ import stylus from 'gulp-stylus';
 import rename from 'gulp-rename';
 
 const pugFiles = 'pages/**/*.pug';
+const componentPugFiles = 'components/**/*.pug';
 const stylusFiles = 'pages/**/*.styl';
+const componentStylusFiles = 'components/**/*.styl';
 const appStylus = 'app.styl';
+const commonStylusFiles = 'styles/*.styl';
 
-async function doPUG(path) {
+async function doPUG(path, distPath) {
     return gulp.src(path)
         .pipe(pug())
         .pipe(rename({
             extname: '.wxml',
         }))
-        .pipe(gulp.dest('pages'));
+        .pipe(gulp.dest(distPath));
 }
 
-async function doStylus(path) {
+async function doStylus(path, distPath) {
     return gulp.src(path)
         .pipe(stylus({
             'include css': true,
@@ -24,15 +27,27 @@ async function doStylus(path) {
         .pipe(rename({
             extname: '.wxss',
         }))
-        .pipe(gulp.dest('pages'))
+        .pipe(gulp.dest(distPath))
 }
 
 gulp.task('pug', async() => {
-    return doPUG(pugFiles)
+    return doPUG(pugFiles, 'pages')
+})
+
+gulp.task('componentPug', async() => {
+    return doPUG(componentPugFiles, 'components')
 })
 
 gulp.task('stylus', async() => {
-    return doStylus(stylusFiles)
+    return doStylus(stylusFiles, 'pages')
+})
+
+gulp.task('componentStylus', async() => {
+    return doStylus(componentStylusFiles, 'components')
+})
+
+gulp.task('commonStylus', async() => {
+    return doStylus(commonStylusFiles, 'styles')
 })
 
 gulp.task('app', () => {
@@ -47,10 +62,13 @@ gulp.task('app', () => {
 })
 
 gulp.task('watch', gulp.series(
-    gulp.parallel('pug', 'stylus', 'app'),
+    gulp.parallel('pug', 'componentPug', 'stylus', 'commonStylus', 'app', ),
     () => {
         gulp.watch(pugFiles, gulp.parallel('pug'))
+        gulp.watch(componentPugFiles, gulp.parallel('componentPug'))
         gulp.watch(stylusFiles, gulp.parallel('stylus'))
+        gulp.watch(componentStylusFiles, gulp.parallel('componentStylus'))
+        gulp.watch(commonStylusFiles, gulp.parallel('commonStylus'))
         gulp.watch(appStylus, gulp.parallel('app'))
     },
     taskDone => taskDone()
@@ -58,7 +76,10 @@ gulp.task('watch', gulp.series(
 
 gulp.task('default', gulp.parallel(
     'pug',
+    'componentPug',
     'stylus',
+    'componentStylus',
+    'commonStylus',
     'app',
     taskDone => taskDone()
 ))
