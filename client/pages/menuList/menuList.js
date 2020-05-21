@@ -1,18 +1,24 @@
+const { fetchMenuList } = require('../../services/menu');
+
 Page({
   data: {
     menuList: []
   },
 
   onLoad() {
-    wx.cloud.callFunction({
-      name: 'add',
-      success: (res) => {
-        if (res.result.code == 200) {
-          const { menuList } = res.result.data
-          this.setData({ menuList })
-        }
-      },
-      fail: console.error
+    fetchMenuList().then(res => {
+      const { menuList } = res
+      const errorData = menuList.length == 0 && { message: '暂无数据' }
+      this.setData({
+        loading: false,
+        errorData,
+        menuList
+      })
+    }).catch(err => {
+      this.setData({
+        loading: false,
+        errorData: err,
+      })
     })
   }
 })

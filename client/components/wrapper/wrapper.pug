@@ -1,0 +1,18 @@
+view.wrapper
+  view.error(
+    wx:if!="{{!loading && errorData}}"
+  )
+    image.err-img(
+      src="/images/none.png"
+      mode="widthFix"
+    )
+    view.gray.mt10.mb10 {{errorData.message}}
+    view.err-btn.black.font14(
+      bindtap="handleBtnTap"
+    ) {{ btnText }}
+
+  view.classname
+    slot(
+      name="page"
+      wx:if!="{{!errorData && !none}}"
+    )

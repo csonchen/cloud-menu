@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/addCgi/addCgi",
-    "pages/menuList/menuList"
+    "pages/menuList/menuList",
+    "pages/search/search"
   ],
   "tabBar": {
     "color": "#000000",
@@ -20,7 +21,9 @@
       "text": "我的"
     }]
   },
-  "usingComponents": {},
+  "usingComponents": {
+    "wrapper": "/components/wrapper/wrapper"
+  },
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
