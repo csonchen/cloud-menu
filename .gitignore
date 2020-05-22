@@ -1,3 +1,14 @@
+## package
 **/node_modules
-**/*.wxss
-**/*.wxml
+
+## components
+client/components/**/*.wxml
+client/components/**/*.wxss
+
+## pages
+client/pages/**/*.wxml
+client/pages/**/*.wxss
+
+## wxss
+client/styles/*.wxss
+app.wxss

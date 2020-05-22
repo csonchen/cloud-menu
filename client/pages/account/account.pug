@@ -1,12 +1,15 @@
-view
-  view.account-area.flex.flex-middle
-    view.avatar.mr15
-      image.avatar-img(
-        src=""
-      )
+wrapper(
+  loading="{{loading}}"
+  errorData="{{errorData}}"
+)
+  view(slot="page")
+    view.account-area.flex.flex-middle
+      view.avatar.mr15
+        image.avatar-img(
+          src="{{account.avatarUrl}}"
+        )
 
-    view.account-info
-      button(
-        open-type="getUserInfo"
-        bindgetuserinfo="bindGetUserInfo"
-      ) name
+      view.account-info
+        view(
+          bind:tap="{{!account ? 'bindGetUserInfo' : ''}}"
+        ) {{account.nickName ? account.nickName : '点击登录'}}

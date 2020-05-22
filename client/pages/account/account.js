@@ -2,26 +2,51 @@ const qcloud = require('../../vendor/wafer2-client-sdk/index')
 
 
 Page({
-  bindGetUserInfo(e) {
-    const session = qcloud.Session.get()
+  session: qcloud.Session.get(),
 
-    debugger
-    if (session) {
+  data: {
+    account: null
+  },
+
+  onLoad() {
+    if (this.session) {
+      this.setData({ account: this.session.userinfo })
+    }
+  },
+
+  bindGetUserInfo(e) {
+    const _this = this
+    this.setData({ loading: true })
+    if (this.session) {
       qcloud.loginWithCode({
         success(res) {
-          console.log(res)
+          _this.setData({ 
+            account: res,
+            loading: false,
+            errorData: null 
+          })
         },
         fail(err) {
-          console.log(err)
+          _this.setData({
+            errorData: err,
+            loading: false
+          })
         }
       })
     } else {
       qcloud.login({
         success(res) {
-          console.log(res) 
+          _this.setData({ 
+            account: res,
+            loading: false,
+            errorData: null 
+          })
         },
         fail(err) {
-          console.log(err)
+          _this.setData({
+            errorData: err,
+            loading: false
+          })
         }
       })
     }
