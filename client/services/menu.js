@@ -1,10 +1,11 @@
 const request = require('../services/request');
 
-const fetchMenuList = ({ keyword = '' } = {}) => {
+const fetchMenuList = ({ keyword = '', foodType } = {}) => {
   return request(
-    'add', 
+    'menu', 
     {
       keyword,
+      foodType,
     }
   )
 }
