@@ -1,5 +1,9 @@
 view.black
-  search(placeholder="输入菜名/菜系")
+  search(
+    placeholder="输入菜名/菜系" 
+    disabled
+    bind:tap="toSearchPage"
+  )
 
   view.page-body
     weekBestCard

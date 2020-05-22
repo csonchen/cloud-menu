@@ -59,7 +59,6 @@ function login (opts) {
     if (!opts.loginUrl) {
         return opts.fail(new Error('登录错误：缺少登录地址，请通过 setLoginUrl() 方法设置登录地址'))
     }
-
     getWxLoginResult((err, loginResult) => {
         if (err) {
             return opts.fail(err)

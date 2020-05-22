@@ -11,6 +11,12 @@ Page({
         requestResult: ''
     },
 
+    toSearchPage() {
+        wx.navigateTo({
+            url: '/pages/search/search'
+        })
+    },
+
     // 用户登录示例
     bindGetUserInfo: function () {
         wx.cloud.callFunction({
