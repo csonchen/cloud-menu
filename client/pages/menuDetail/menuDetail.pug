@@ -1,2 +1,22 @@
 wrapper
-  view(slot="page") test...
+  view.black(slot="page")
+    view.header.bg-white.mb10.pb10
+      view.banner
+        image.banner-img.mb20(
+          src=""
+        )
+
+      view.font20.flex.flex-center 标题
+
+    view.body.bg-white
+      view.font16.mb10 食材
+
+      view.font14.mb10 猪肉140克，酱油100克
+
+      view.font16.mb10 做法
+
+      view.font14.mb10
+        wxParse(
+          nodes="{{menuDesc}}"
+        )
+
