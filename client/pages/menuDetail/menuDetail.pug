@@ -1,22 +1,24 @@
-wrapper
+wrapper(
+  loading="{{loading}}"
+  errorData="{{errorData}}"
+)
   view.black(slot="page")
     view.header.bg-white.mb10.pb10
       view.banner
         image.banner-img.mb20(
-          src=""
+          src="{{menu.pic}}"
         )
 
-      view.font20.flex.flex-center 标题
+      view.font20.flex.flex-center {{menu.title}}
 
     view.body.bg-white
       view.font16.mb10 食材
-
-      view.font14.mb10 猪肉140克，酱油100克
-
+      view.font14.mb10 {{menu.foodDesc}}
+      view.font16.mb10 调味品
+      view.font14.mb10 {{menu.flavor}}
       view.font16.mb10 做法
-
       view.font14.mb10
         wxParse(
-          nodes="{{menuDesc}}"
+          nodes="{{menu.desc}}"
         )
 

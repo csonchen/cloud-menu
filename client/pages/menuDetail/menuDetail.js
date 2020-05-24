@@ -2,12 +2,30 @@ const { fetchMenuList } = require('../../services/menu');
 
 Page({
   data: {
-    menuDesc: "<div style='color: red;'>测试下富文本</div>"
+    menu: null,
   },
 
-  onLoad() {
+  onLoad(options) {
+    const { id } = options || {}
+    if (!id) {
+      return
+    }
+ 
+    this.setData({ loading: true })
     fetchMenuList({
-      foodType: '1'
-    }).then(res => {})
+      id
+    }).then(res => {
+      const { data: menu } = res
+      this.setData({ 
+        menu,
+        loading: false,
+        errorData: null, 
+      })
+    }).catch(err => {
+      this.setData({
+        loading: false,
+        errorData: err,
+      })
+    })
   }
 })

@@ -23,15 +23,36 @@ const menuJoinCategory = () => {
 
 }
 
+const getMenuItem = async(mid) => {
+  const db = cloud.database()
+  let result = await db.collection('menu_list').where({
+    _id: mid
+  }).get()
+  result = result.data.length > 0 ? result.data[0] : null
+
+  return {
+    code: 200,
+    message: 'ok',
+    data: {
+      data: result
+    }
+  }
+}
+
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { keyword = '', foodType } = event
+  const { keyword = '', foodType, id } = event
 
   // 与食物表联查
   // if (foodType) {
   //   await menuJoinFood(foodType)
   //   return
   // }
+
+  if (id) {
+    const result = await getMenuItem(id)
+    return result
+  }
 
   const db = cloud.database()
   let params = { }

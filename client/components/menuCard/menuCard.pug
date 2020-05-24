@@ -1,4 +1,6 @@
-view.menu-card.card-panel.flex.mb10
+view.menu-card.card-panel.flex.mb10(
+  bind:tap="toMenuDetail"
+)
   view.img-wrap
     image.img(src = "{{ menu.pic }}")
 
