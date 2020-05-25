@@ -12,3 +12,6 @@ client/pages/**/*.wxss
 ## wxss
 client/styles/*.wxss
 app.wxss
+
+## py
+py/*
